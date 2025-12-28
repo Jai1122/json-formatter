@@ -78,3 +78,7 @@ temp/
 
 # Claude Code
 .claude
+
+# Launch script (launch.sh) is portable and safe to commit
+# QUICK_LAUNCH_GUIDE.md is also safe to commit
+# User-created Automator workflows are user-specific and not tracked

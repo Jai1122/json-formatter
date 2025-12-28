@@ -56,18 +56,34 @@ If you have Node v14 or lower, please upgrade:
    npm install
    ```
 
-3. **Start the development server**
+3. **Launch the application**
+
+   **Option A: Simple command (Easiest)**
+   ```bash
+   npm start
+   ```
+
+   **Option B: Double-click**
+   - Double-click `launch.sh` in Finder
+
+   **Option C: Traditional way**
    ```bash
    npm run dev
    ```
 
-4. **Open in browser**
-
-   The app will automatically open at `http://localhost:5173`
-
-   If it doesn't open automatically, manually navigate to the URL shown in the terminal.
+4. **The app will automatically open in your browser at `http://localhost:5173`**
 
 That's it! The app is now running locally on your machine.
+
+### 🚀 Pro Tip: Set up a Keyboard Shortcut
+
+Want to launch JSON Formatter instantly with a hotkey (e.g., `Cmd+Shift+J`)?
+
+See **[QUICK_LAUNCH_GUIDE.md](./QUICK_LAUNCH_GUIDE.md)** for step-by-step instructions to set up:
+- Global keyboard shortcuts
+- Dock icon
+- Spotlight search
+- And more!
 
 ## Usage Guide
 

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "sh launch.sh"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
