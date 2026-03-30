@@ -23,12 +23,11 @@ const TreeView: React.FC<TreeViewProps> = ({ jsonString, onNodeClick, searchQuer
     }
   }, [jsonString]);
 
-  // Expand matching nodes when search query changes
+  // Expand matching nodes when search query changes.
+  // Uses functional setState to always operate on the latest tree,
+  // avoiding a stale closure when jsonString and searchQuery change together.
   useEffect(() => {
-    if (tree) {
-      const expandedTree = expandMatchingNodes(tree, searchQuery);
-      setTree(expandedTree);
-    }
+    setTree(prev => (prev ? expandMatchingNodes(prev, searchQuery) : null));
   }, [searchQuery]);
 
   const handleToggle = (path: string) => {

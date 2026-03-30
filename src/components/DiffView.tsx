@@ -11,7 +11,7 @@ interface DiffViewProps {
 const DiffView: React.FC<DiffViewProps> = ({
   leftJson,
   rightJson,
-  onLeftChange,
+  onLeftChange: _onLeftChange,
   onRightChange,
 }) => {
   const [leftValid, setLeftValid] = useState(true);
@@ -37,19 +37,18 @@ const DiffView: React.FC<DiffViewProps> = ({
   }, [rightJson]);
 
   const handleEditorDidMount = (editor: any) => {
-    // Configure diff editor
     editor.updateOptions({
       renderSideBySide: true,
-      readOnly: false,
       automaticLayout: true,
     });
 
-    // Get the modified editor (RIGHT side in Monaco's layout) to listen for changes
-    const modifiedEditor = editor.getModifiedEditor();
+    // Enforce read-only on the original (left) side — the UI labels it "Read-only"
+    editor.getOriginalEditor().updateOptions({ readOnly: true });
 
+    // Listen for changes on the modified (right) side only
+    const modifiedEditor = editor.getModifiedEditor();
     modifiedEditor.onDidChangeModelContent(() => {
-      const newValue = modifiedEditor.getValue();
-      onRightChange(newValue);  // Modified editor is on the RIGHT
+      onRightChange(modifiedEditor.getValue());
     });
   };
 
@@ -81,7 +80,6 @@ const DiffView: React.FC<DiffViewProps> = ({
           onMount={handleEditorDidMount}
           options={{
             renderSideBySide: true,
-            readOnly: false,
             enableSplitViewResizing: true,
             renderOverviewRuler: true,
             minimap: { enabled: false },

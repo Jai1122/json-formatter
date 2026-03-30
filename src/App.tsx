@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ViewMode } from './types';
 import Editor from './components/Editor';
 import TreeView from './components/TreeView';
@@ -139,11 +139,13 @@ function App() {
     setNotification({ message, type, visible: true });
   };
 
-  const hideNotification = () => {
-    setNotification({ ...notification, visible: false });
-  };
+  // useCallback + functional update: stable reference prevents Notification's
+  // useEffect from resetting the 3-second auto-dismiss timer on every render.
+  const hideNotification = useCallback(() => {
+    setNotification(prev => ({ ...prev, visible: false }));
+  }, []);
 
-  const handleNodeClick = (path: string, value: any) => {
+  const handleNodeClick = (path: string, _value: unknown) => {
     setCurrentPath(path);
   };
 
